@@ -61,3 +61,6 @@ print(
     '\nnumpy: ', data.dot(data),        # [[7, 10], [15, 22]]
     '\ntorch: ', tensor.dot(tensor)     # this will convert tensor to [1,2,3,4], you'll get 30.0
 )
+# NOTE by 2023/12/04 the method tensor.dot will expect you to provide both 1D
+# tensors. If you throw 2D tensors like this example, an exception will be
+# directly thrown out.

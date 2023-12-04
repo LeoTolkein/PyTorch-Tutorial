@@ -17,6 +17,9 @@ variable = Variable(tensor, requires_grad=True)      # build a variable, usually
 
 print(tensor)       # [torch.FloatTensor of size 2x2]
 print(variable)     # [torch.FloatTensor of size 2x2]
+# NOTE by 2023/12/04 variable will print out: 
+# tensor([[1., 2.],
+#         [3., 4.]], requires_grad=True)
 
 # till now the tensor and variable seem the same.
 # However, the variable is a part of the graph, it's a part of the auto-gradient.
@@ -24,7 +27,7 @@ print(variable)     # [torch.FloatTensor of size 2x2]
 t_out = torch.mean(tensor*tensor)       # x^2
 v_out = torch.mean(variable*variable)   # x^2
 print(t_out)
-print(v_out)    # 7.5
+print(v_out)    # 7.5  # NOTE by 2023/12/04, tensor(7.5000, grad_fn=<MeanBackward0>)
 
 v_out.backward()    # backpropagation from v_out
 # v_out = 1/4 * sum(variable*variable)
@@ -38,16 +41,14 @@ print(variable.grad)
 print(variable)     # this is data in variable format
 """
 Variable containing:
- 1  2
- 3  4
-[torch.FloatTensor of size 2x2]
+tensor([[1., 2.],
+        [3., 4.]], requires_grad=True)
 """
 
 print(variable.data)    # this is data in tensor format
 """
- 1  2
- 3  4
-[torch.FloatTensor of size 2x2]
+tensor([[1., 2.],
+        [3., 4.]])
 """
 
 print(variable.data.numpy())    # numpy format
